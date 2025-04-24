@@ -19,7 +19,6 @@ public class LoginTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("incognito");
         System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
-
         Sesion.driver = new ChromeDriver(options);
         Sesion.driver.manage().window().maximize();
         Sesion.properties.load(new FileReader("src\\test\\java\\resources\\Test.properties"));

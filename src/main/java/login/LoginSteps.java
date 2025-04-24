@@ -4,11 +4,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import utilerias.Objetos;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import utilerias.Sesion;
 
 import java.io.FileReader;
-import java.util.Properties;
 
 import static utilerias.Sesion.driver;
 import static utilerias.Sesion.properties;
