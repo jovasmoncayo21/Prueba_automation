@@ -48,7 +48,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying...'
-        bat 'java -cp target/Proyecto_prueba2-1.0-SNAPSHOT.jar org.example.Main'
+        bat 'java -cp target/Proyecto_prueba2-1.0-SNAPSHOT.jar org.example.main'
 }
 
 post {
