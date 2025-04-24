@@ -26,7 +26,7 @@ pipeline {
       bat 'mvn clean compile'
     }
   }
-    stage('Test') {
+    stage('tests') {
       steps {
         echo 'Testing...'
         script {
@@ -36,7 +36,7 @@ pipeline {
                 echo "Testing the plus-minus sign: &#x00b1;" // Otra forma de escapar
         }
         // Run tests using Maven
-        bat 'mvn test'
+        bat 'mvn tests'
             }
         }
     stage ('Package'){
@@ -48,7 +48,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying...'
-        bat 'java -cp target/Proyecto_prueba2-1.0-SNAPSHOT.jar org.example.Main'
+        bat 'java -cp target/Proyecto_prueba2-1.0-SNAPSHOT.jar org.example.main'
 }
 
 post {
