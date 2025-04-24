@@ -1,6 +1,9 @@
 pipeline {
   agent any
 
+  environment {
+    CHROME_DRIVER_PATH = "src\main\resources\chromedriver.exe"
+ }
   tools {
     maven 'Maven Apache'
   }
