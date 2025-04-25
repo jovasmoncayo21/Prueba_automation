@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.20.0</version> <!-- Puedes usar otra versión si lo necesitas -->
+            <version>3.141.59</version> <!-- Compatible con Java 8 -->
         </dependency>
 
         <!-- JUnit 4 -->
