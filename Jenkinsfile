@@ -23,7 +23,7 @@ pipeline {
             }
         }
 
-        stage('Ejecución clase Main') {
+        stage('Ejecucion clase Main') {
             steps {
                 echo "Ejecutando clase principal (Main)..."
                 bat 'mvn exec:java -Dexec.mainClass="org.example.Main"'
@@ -39,7 +39,7 @@ pipeline {
 
         stage('Publicar resultados de pruebas') {
             steps {
-                junit 'target/surefire-reports/*.xml'
+                junit 'target\generated-test-sources\test-annotations/*.xml'
             }
         }
     }
