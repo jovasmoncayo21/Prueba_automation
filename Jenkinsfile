@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo "Descargando código..."
+                echo "Descargando codigo..."
                 git url: 'https://github.com/jovasmoncayo21/Prueba_automation.git', branch: 'master'
             }
         }
@@ -40,6 +40,11 @@ pipeline {
         stage('Publicar resultados de pruebas') {
             steps {
                 junit 'target/custom-reports/*.xml'
+            }
+        }
+        stage('Guardar reportes como artefactos') {
+            steps {
+                archiveArtifacts artifacts: 'target/custom-reports/*', fingerprint: true
             }
         }
     }
