@@ -45,11 +45,6 @@ pipeline {
     }
 
     post {
-        always {
-            echo "Finalizando build..."
-            cleanWs()
-        }
-
         success {
             echo "¡Build completado exitosamente!"
         }
