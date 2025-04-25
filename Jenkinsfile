@@ -12,7 +12,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "Descargando código..."
-                checkout scm
+                git url: 'https://github.com/jovasmoncayo21/Prueba_automation.git', branch: 'master'
             }
         }
 
