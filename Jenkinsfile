@@ -1,64 +1,61 @@
 pipeline {
-  agent any
+    agent any
 
-  tools {
-    maven 'Maven Apache'
-  }
-  stages {
-    stage('Checkout') {
-      steps {
-        //Clonar repo desde Github
-            git url: 'https://github.com/jovasmoncayo21/Prueba_automation.git', branch: 'master'
-      }
+    environment {
+        MAVEN_OPTS = "-Dmaven.test.failure.ignore=true"
     }
 
-    stage('Build') {
-      steps {
-        //Compilar el proyecto usando Maven
-        script {
-          echo "Testing the plus-minus sign: ±" // Esto puede causar el error
-                // Solución:
-                echo "Testing the plus-minus sign: \\u00b1"  // Escapar el carácter
-                echo "Testing the plus-minus sign: &#x00b1;" // Otra forma de escapar
-      }
-      
-      //Compilar el proyecto
-      bat 'mvn clean compile'
+    tools {
+        maven 'Maven 3.9.9' // Asegúrate de que este nombre coincida con el que configuraste en Jenkins > Global Tool Configuration
     }
-  }
-    stage('tests') {
-      steps {
-        echo 'Testing...'
-        script {
-          echo "Testing the plus-minus sign: ±" // Esto puede causar el error
-                // Solución:
-                echo "Testing the plus-minus sign: \\u00b1"  // Escapar el carácter
-                echo "Testing the plus-minus sign: &#x00b1;" // Otra forma de escapar
-        }
-        // Run tests using Maven
-        bat 'mvn tests'
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Descargando código..."
+                checkout scm
             }
         }
-    stage ('Package'){
-      steps {
-        echo 'Packaging...'
-        bat 'mvn package'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        echo 'Deploying...'
-        bat 'java -cp target/Proyecto_prueba2-1.0-SNAPSHOT.jar org.example.main'
-}
 
-post {
-  success {
-    echo 'Build completed successfully'
-  }
-  failure {
-    echo 'Build failed'
-  }
-}
-}
-}
+        stage('Build') {
+            steps {
+                echo "Compilando el proyecto..."
+                bat 'mvn clean compile'
+            }
+        }
+
+        stage('Ejecución clase Main') {
+            steps {
+                echo "Ejecutando clase principal (Main)..."
+                bat 'mvn exec:java -Dexec.mainClass="org.example.Main"'
+            }
+        }
+
+        stage('Ejecutar pruebas') {
+            steps {
+                echo "Ejecutando pruebas automatizadas..."
+                bat 'mvn test'
+            }
+        }
+
+        stage('Publicar resultados de pruebas') {
+            steps {
+                junit 'target/surefire-reports/*.xml'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Finalizando build..."
+            cleanWs()
+        }
+
+        success {
+            echo "¡Build completado exitosamente!"
+        }
+
+        failure {
+            echo "Hubo un error durante la ejecución."
+        }
+    }
 }
