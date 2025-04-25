@@ -1,13 +1,8 @@
 pipeline {
     agent any
 
-    environment {
-        MAVEN_OPTS = "-Dmaven.test.failure.ignore=true"
-    }
-
     tools {
         maven 'Maven 3.9.9' // Asegúrate de que este nombre coincida con el que configuraste en Jenkins > Global Tool Configuration
-        jdk 'jdk'         // También ajusta si usas otra versión de Java
     }
 
     stages {
