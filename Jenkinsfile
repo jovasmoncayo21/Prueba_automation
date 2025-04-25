@@ -39,7 +39,7 @@ pipeline {
 
         stage('Publicar resultados de pruebas') {
             steps {
-                junit 'target/surefire-reports/*.xml'
+                junit 'main/Reports/surefire-reports/*.xml'
             }
         }
     }
