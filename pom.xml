@@ -58,6 +58,7 @@
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
+                             <reportsDirectory>${project.build.directory}/custom-reports</reportsDirectory>
                     </includes>
                 </configuration>
             </plugin>
